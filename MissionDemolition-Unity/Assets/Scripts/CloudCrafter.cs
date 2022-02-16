@@ -2,8 +2,15 @@
  * Created By: Aidan Pohl
  * Created: 02/14/2022
  * 
- * Last Edited By: N/A
- * Last Edited: N/A
+ * Last Edited By: Aidan Pohl
+ * Last Edited: 2/16/2022
+ * Description: create clouds for scene
+ * *//**
+ * Created By: Aidan Pohl
+ * Created: 02/14/2022
+ * 
+ * Last Edited By: Aidan Pohl
+ * Last Edited: 2/16/2022
  * Description: create clouds for scene
  * */
 using System.Collections;
@@ -43,23 +50,34 @@ public class CloudCrafter : MonoBehaviour
             float scaleU = Random.value;
             float scaleVal = Mathf.Lerp(cloudScaleMin, cloudScaleMax, scaleU);
 
-            cPos.y = Mathf.Lerp(cloudPosMin.y, cPos.y, scaleVal); //smaller clouds with smaller scale closer to ground
+            cPos.y = Mathf.Lerp(cloudPosMin.y, cPos.y, scaleU); //smaller clouds with smaller scale closer to ground
+
+            cPos.z = 100 - 90 * scaleU; //push clouds into background
 
             //set adjustments
             cloud.transform.localScale *= scaleVal;
             cloud.transform.position = cPos;
-        }//end for
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+            cloudInstances[i] = cloud; //add the created cloud to the list
+        }//end for
+    }//end Awake()
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
+        foreach (GameObject cloud in cloudInstances)
+        {
+            float scaleVal = cloud.transform.localScale.x;
+            Vector3 cPos = cloud.transform.position;
+            cPos.x -= scaleVal * Time.deltaTime * cloudSpeedMult;
+
+            if (cPos.x <= cloudPosMin.x)
+            {
+                // Move it to the far right
+                cPos.x = cloudPosMax.x;
+            }
+            // Apply the new position to cloud
+            cloud.transform.position = cPos;
+        }//end foreach
+    }//end Update()
 }

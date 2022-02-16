@@ -2,8 +2,8 @@
  * Created By: Aidan Pohl
  * Created: 02/14/2022
  * 
- * Last Edited By: N/A
- * Last Edited: N/A
+ * Last Edited By: Aidan Pohl
+ * Last Edited: 2/16/2022
  * Description: randomly generate a cloud
  * */
 using System.Collections;
@@ -64,7 +64,7 @@ public class Cloud : MonoBehaviour {
             spTrans.localScale = scale;
 
         }//end for (int i = 0; i < num; i++)
-    }
+    }//end Start()
 
     // Update is called once per frame
     void Update()

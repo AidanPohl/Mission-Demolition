@@ -6,8 +6,6 @@
  * Last Edited: N/A
  * 
  * Description: Slingshot Controller
- *
- * 
  * */
 using System.Collections;
 using System.Collections.Generic;
@@ -26,18 +24,25 @@ public class Slingshot : MonoBehaviour
     public GameObject projectile; //Instance of Projectile
     public bool aimingMode; //Is Player Aiming
     public Rigidbody projectileRB; //Rigid Body of Projectile
+
+    static private Slingshot S;
+    static public Vector3 LAUNCH_POS
+    {                                        
+        get
+        {
+            if (S == null) return Vector3.zero;
+            return S.launchPos;
+        }
+    }
     private void Awake()
     {
+        S = this;                                                             
+
         Transform launchPointTrans = transform.Find("Launch Point");
         launchpoint = launchPointTrans.gameObject;
         launchpoint.SetActive(false);
         launchPos = launchPointTrans.position;//position of launch point
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    }//end Awake()
 
     // Update is called once per frame
     void Update()
@@ -76,6 +81,7 @@ public class Slingshot : MonoBehaviour
             projectile = null; //emptys reference to instancerprojectile
         }//end if (Input.GetMouseButtonUp(0))
     } //end Update()
+
     private void OnMouseEnter()
     {
         //print("Slingshot: OnMouseEnter");

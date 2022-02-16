@@ -3,7 +3,7 @@
  * Created: 02/02/2022
  * 
  * Last Edited By: Aidan Pohl
- * Last Edited: 02/14/2022
+ * Last Edited: 02/16/2022
  * 
  * Description: Camera Follow controls
  *
@@ -29,23 +29,33 @@ public class FollowCam : MonoBehaviour
     {
         camZ = this.transform.position.z;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void FixedUpdate()
     {
-        if (POI == null) return;//if no point of interest exit update
+        //if (POI == null) return;//if no point of interest exit update
 
-        Vector3 destination = POI.transform.position;
+        //Vector3 destination = POI.transform.position;
+
+        Vector3 destination; //Destintion of POI
+
+        if (POI == null)
+        {
+            destination = Vector3.zero;
+        }
+        else
+        {
+            destination = POI.transform.position;
+
+            if(POI.tag == "Projectile")
+            {   //if projectile is sleeping, set POI to null;
+                if (POI.GetComponent<Rigidbody>().IsSleeping())
+                {
+                    POI = null;
+                } //end if (POI.GetComponent<Rigidbody>().IsSleeping())
+            }//end  if(POI.tag == "Projectile")
+        }//end if else
+
+
         destination.x = Mathf.Max(minXY.x, destination.x);
         destination.y = Mathf.Max(minXY.y, destination.y);
 

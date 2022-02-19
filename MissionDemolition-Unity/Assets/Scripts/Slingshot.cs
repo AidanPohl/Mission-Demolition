@@ -79,6 +79,8 @@ public class Slingshot : MonoBehaviour
             projectileRB.velocity = -mouseDelta * velocityMultiplier;
             FollowCam.POI = projectile;
             projectile = null; //emptys reference to instancerprojectile
+            MissionDemolition.ShotFired();
+            ProjectileLine.S.poi = projectile;
         }//end if (Input.GetMouseButtonUp(0))
     } //end Update()
 

@@ -2,8 +2,8 @@
  * Created By: Aidan Pohl
  * Created: 02/02/2022
  * 
- * Last Edited By: N/A
- * Last Edited: N/A
+ * Last Edited By: Aidan Pohl
+ * Last Edited: 02/19/2022
  * 
  * Description: Slingshot Controller
  * */
